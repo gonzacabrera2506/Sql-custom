@@ -1,5 +1,7 @@
 # Sql-custom
 
+# TEMA 1- MANIPULACION
+
 CREATE TABLE curso (
   id INT AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(30) NOT NULL,
