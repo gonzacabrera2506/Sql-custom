@@ -91,9 +91,25 @@ SELECT curso.nombre, curso.cupo, curso.cupo - COUNT(inscripcion.numero) AS 'DISP
 SELECT curso.nombre, curso.cupo, curso.cupo - COUNT(inscripcion.numero) AS 'DISPONIBLE MENOR A 10'
 FROM inscripcion RIGHT JOIN curso ON inscripcion.curso_codigo = curso.codigo GROUP BY curso.nombre, curso.cupo HAVING curso.cupo - COUNT(inscripcion.numero) < 10
 
+# TEMA 3- INDICES
 
+CREATE TABLE persona(
+  id INT NOT NULL,
+  nombre VARCHAR(50) NOT NULL
+);
 
+INSERT INTO persona VALUES
+(4, 'juan'),
+(2, 'camilo'),
+(1, 'gonzalo'),
+(3, 'lucio');
 
+SELECT * FROM persona;
+
+ALTER TABLE persona
+ADD PRIMARY KEY (id);
+
+SELECT * FROM persona;
 
 
 
