@@ -39,24 +39,29 @@ SELECT nombre, apellido FROM profesor WHERE fecha_nacimiento BETWEEN 1980-01-01 
 
 # TEMA 1- FUNCIONES AGREGADAS
 1-Escriba una consulta para saber cuántos estudiantes son de la carrera Mecánica.
+
 SELECT COUNT(ESTUDIANTE_legajo) from inscripcion WHERE carrera = 'Mecánica';
 
 2- Escriba una consulta para saber, de la tabla PROFESOR, el salario mínimo de los profesores nacidos en la década del 80.
+
 SELECT MIN(salario) FROM profesor WHERE fecha_nacimiento BETWEEN  '1980-01-01' AND '1989-12-31';
 
 3-Escriba las siguientes consultas:
 
 Cantidad de pasajeros por país
-SELECT pais.nombre, COUNT(*) FROM pasajero JOIN pais ON pasajero.idpais = pais.idpais
-GROUP BY pais.nombre
+
+SELECT pais.nombre, COUNT(*) FROM pasajero JOIN pais ON pasajero.idpais = pais.idpais GROUP BY pais.nombre;
 
 Suma de todos los pagos realizados
+
 SELECT SUM(monto) FROM pago;
 
 Suma de todos los pagos que realizó un pasajero. El monto debe aparecer con dos decimales.
+
 SELECT idpasajero, ROUND(SUM(monto), 2) FROM pago GROUP BY idpasajero;
 
 Promedio de los pagos que realizó un pasajero.
+
 SELECT idpasajero, AVG(SUM(monto) FROM pago GROUP BY idpasajero;
 
 
