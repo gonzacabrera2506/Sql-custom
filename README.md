@@ -64,6 +64,32 @@ Promedio de los pagos que realizó un pasajero.
 
 SELECT idpasajero, AVG(SUM(monto) FROM pago GROUP BY idpasajero;
 
+# TEMA 2- MULTIPLE TABLES
+
+1-Nombre, apellido y cursos que realiza cada estudiante.
+
+SELECT estudiante.nombre, estudiante.apellido, curso.nombre FROM inscripcion JOIN curso ON inscripcion.curso_codigo = curso.codigo JOIN estudiante ON inscripcion.estudiante_legajo = estudiante.legajo;
+
+2-Nombre, apellido y cursos que realiza cada estudiante, ordenados por el nombre del curso.
+
+SELECT estudiante.nombre, estudiante.apellido, curso.nombre FROM inscripcion JOIN curso ON inscripcion.curso_codigo = curso.codigo JOIN estudiante ON inscripcion.estudiante_legajo = estudiante.legajo ORDER BY curso.nombre ASC;
+
+3-Nombre, apellido y cursos que dicta cada profesor.
+
+SELECT profesor.nombre, profesor.apellido, curso.nombre FROM profesor LEFT JOIN curso ON profesor.id = curso.profesor_id;
+
+4-Nombre, apellido y cursos que dicta cada profesor, ordenados por el nombre del curso.
+
+SELECT profesor.nombre, profesor.apellido, curso.nombre FROM profesor LEFT JOIN curso ON profesor.id = curso.profesor_id ORDER BY curso.nombre ASC;
+
+5-Cupo disponible para cada curso (Si el cupo es de 35 estudiantes y hay 5 inscriptos, el cupo disponible será 30).
+
+SELECT curso.nombre, curso.cupo, curso.cupo - COUNT(inscripcion.numero) AS 'DISPONIBLE' FROM inscripcion RIGHT JOIN curso ON inscripcion.curso_codigo = curso.codigo GROUP BY curso.nombre, curso.cupo
+
+6-Cursos cuyo cupo disponible sea menor a 10.
+
+SELECT curso.nombre, curso.cupo, curso.cupo - COUNT(inscripcion.numero) AS 'DISPONIBLE MENOR A 10'
+FROM inscripcion RIGHT JOIN curso ON inscripcion.curso_codigo = curso.codigo GROUP BY curso.nombre, curso.cupo HAVING curso.cupo - COUNT(inscripcion.numero) < 10
 
 
 
