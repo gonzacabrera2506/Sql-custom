@@ -113,5 +113,14 @@ SELECT * FROM persona;
 
 
 
+# TEMA 4- QUERIES ANIDADAS
+
+1-Escriba una consulta que devuelva la cantidad de profesores que dictan más de un curso en el turno Noche.
+
+SELECT COUNT(*) FROM profesor WHERE id IN (SELECT DISTINCT profesor_id FROM curso WHERE turno like 'Noche');
+
+2-Escriba una consulta para obtener la información de todos los estudiantes que no realizan el curso con código 105.
+
+SELECT * FROM estudiante WHERE legajo NOT IN (SELECT estudiante_legajo FROM inscripcion WHERE curso_codigo = 105);
 
 
