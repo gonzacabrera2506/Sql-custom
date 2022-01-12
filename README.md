@@ -123,4 +123,32 @@ SELECT COUNT(*) FROM profesor WHERE id IN (SELECT DISTINCT profesor_id FROM curs
 
 SELECT * FROM estudiante WHERE legajo NOT IN (SELECT estudiante_legajo FROM inscripcion WHERE curso_codigo = 105);
 
+# EVALUCION INTEGRAL 1
+
+1-Escriba una consulta que devuelva el legajo y la cantidad de cursos que realiza cada estudiante.
+
+SELECT estudiante.legajo, COUNT(inscripcion.numero) AS 'Cantidad de cursos'
+FROM inscripcion RIGHT JOIN estudiante ON inscripcion.estudiante_legajo = estudiante.legajo GROUP BY estudiante.legajo;
+
+2-Escriba una consulta que devuelva el legajo y la cantidad de cursos de los estudiantes que realizan más de un curso.
+
+SELECT estudiante_legajo, COUNT(*) AS 'Cantidad de cursos' FROM inscripcion GROUP BY estudiante_legajo HAVING COUNT(*) > 1;
+
+3-Escriba una consulta que devuelva la información de los estudiantes que no realizan ningún curso.
+
+SELECT * FROM estudiante WHERE legajo NOT IN (SELECT DISTINCT estudiante_legajo FROM inscripcion);
+
+4-Escriba para cada tabla, los index (incluyendo su tipo) que tiene cada una.
+
+SHOW INDEXES FROM profesor;
+SHOW INDEXES FROM estudiante;
+SHOW INDEXES FROM curso;
+SHOW INDEXES FROM inscripcion;
+
+5-Liste toda la información sobre los estudiantes que realizan cursos con los profesores de apellido “Pérez” y “Paz”.
+
+SELECT DISTINCT estudiante.legajo, estudiante.nombre, estudiante.apellido, estudiante.fecha_nacimiento, estudiante.carrera
+FROM inscripcion
+JOIN estudiante ON inscripcion.estudiante_legajo = estudiante.legajo
+WHERE inscripcion.curso_codigo IN (SELECT curso.codigo FROM curso JOIN profesor ON curso.profesor_id = profesor.id  WHERE profesor.apellido = 'Pérez' OR profesor.apellido = 'Paz');
 
